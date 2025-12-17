@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# datasets / large files
+data/
+*.csv
+
+# local outputs
+models/
+reports/
+*.joblib
+
+# jupyter (if you use later)
+.ipynb_checkpoints/
