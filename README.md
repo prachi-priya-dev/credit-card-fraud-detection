@@ -87,7 +87,9 @@ Feature Importance (Random Forest)
 ### 1) Setup environment
 
 python -m venv .venv
+
 source .venv/bin/activate   # macOS/Linux
+
 .venv\Scripts\activate      # Windows
 
 pip install -r requirements.txt
@@ -101,9 +103,13 @@ data/raw/creditcard.csv
 ### 3) Run pipeline
 
 python -m src.train_baseline
+
 python -m src.threshold_tuning
+
 python -m src.train_models
+
 python -m src.eda_report
+
 python -m src.reporting
 
 ---
