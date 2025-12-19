@@ -1,16 +1,16 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
+
+# OS
 .DS_Store
 
-# datasets / large files
-data/
-*.csv
-
-# local outputs
+# Data & models (never commit)
+data/raw/
 models/
-reports/
-*.joblib
 
-# jupyter (if you use later)
-.ipynb_checkpoints/
+# Reports
+reports/*
+!reports/figures/
+!reports/figures/*.png

@@ -1,6 +1,7 @@
 # src/train_models.py
 import json
 from pathlib import Path
+import joblib
 
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -87,6 +88,8 @@ def main():
     for name, model in models.items():
         print(f"\nTraining: {name}")
         model.fit(X_train, y_train)
+
+        joblib.dump(model, MODELS_DIR / f"{name}.joblib")
 
         # probability estimates
         if hasattr(model, "predict_proba"):
