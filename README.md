@@ -84,20 +84,22 @@ Feature Importance (Random Forest)
 
 ## 🧪 How to Run
 
-*1) Setup environment*
+### 1) Setup environment
+
 python -m venv .venv
 source .venv/bin/activate   # macOS/Linux
-# .venv\Scripts\activate    # Windows
+.venv\Scripts\activate      # Windows
 
 pip install -r requirements.txt
 
-*2) Add dataset*
+### 2) Add dataset
 
 Place the dataset file at:
 
 data/raw/creditcard.csv
 
-*3) Run pipeline*
+### 3) Run pipeline
+
 python -m src.train_baseline
 python -m src.threshold_tuning
 python -m src.train_models
