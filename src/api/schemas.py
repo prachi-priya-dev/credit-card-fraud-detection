@@ -1,10 +1,12 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict
+from typing import Dict, List, Optional
 
 
 class PredictRequest(BaseModel):
-    # expects 30 feature values (Time, V1..V28, Amount) in correct order
-    features: List[float] = Field(..., min_length=30, max_length=30)
+    # frontend sends a dict of named features
+    features: Dict[str, float] = Field(..., description="Feature map: Time, V1..V28, Amount")
+    # allow UI to override threshold
+    threshold: Optional[float] = Field(None, ge=0.0, le=1.0)
 
 
 class PredictResponse(BaseModel):

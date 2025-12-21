@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Detection Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Credit Card Fraud Detection</h1>
+        <p class="muted">
+          Paste a sample transaction (features) → get prediction + confidence.
+        </p>
+      </header>
+
+      <section class="card">
+        <h2>Single Prediction</h2>
+
+        <label class="label">API Base URL</label>
+        <input id="apiUrl" class="input" type="text" value="http://localhost:8000" />
+
+        <label class="label">Threshold</label>
+        <input id="threshold" class="input" type="number" step="0.01" value="0.50" min="0" max="1" />
+
+        <label class="label">Input JSON (single transaction)</label>
+        <textarea id="payload" class="textarea" rows="10">
+{
+  "features": {
+  "Time": 0,
+  "V1": -1.359807,
+  "V2": -0.072781,
+  "V3": 2.536347,
+  "V4": 1.378155,
+  "V5": -0.338321,
+  "V6": 0.462388,
+  "V7": 0.239599,
+  "V8": 0.098698,
+  "V9": 0.363787,
+  "V10": 0.090794,
+  "V11": -0.5516,
+  "V12": -0.6178,
+  "V13": -0.9913,
+  "V14": -0.3112,
+  "V15": 1.4682,
+  "V16": -0.4704,
+  "V17": 0.2079,
+  "V18": 0.0258,
+  "V19": 0.4039,
+  "V20": 0.2514,
+  "V21": -0.0183,
+  "V22": 0.2778,
+  "V23": -0.1104,
+  "V24": 0.0669,
+  "V25": 0.1285,
+  "V26": -0.1891,
+  "V27": 0.1335,
+  "V28": -0.0211,
+  "Amount": 149.62
+  }
+}
+        </textarea>
+
+        <button id="predictBtn" class="btn">Predict</button>
+
+        <div id="result" class="result muted">Result will appear here…</div>
+      </section>
+
+      <footer class="muted">
+        Built with FastAPI • Model served locally • Threshold-aware scoring
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
