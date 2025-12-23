@@ -1,18 +1,10 @@
-from pathlib import Path
-
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 
-from .schemas import (
-    PredictRequest,
-    PredictResponse,
-    PredictBatchRequest,
-    PredictBatchResponse,
-)
-from .predict import predict_one, THRESHOLD
-
+from .schemas import PredictRequest, PredictResponse, PredictBatchRequest, PredictBatchResponse
+from .predict import predict_one
 
 app = FastAPI(
     title="Credit Card Fraud Detection API",
@@ -20,20 +12,10 @@ app = FastAPI(
     description="Predict fraud probability from credit card transaction features.",
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],   # for dev; later you can restrict to your domain
-    allow_credentials=True,
-    allow_methods=["*"],   # IMPORTANT: includes OPTIONS
-    allow_headers=["*"],
-)
-
-
-# ✅ project root = credit-card-fraud-detection/
+# Serve static UI (safe mount)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 STATIC_DIR = PROJECT_ROOT / "static"
 
-# ✅ Mount UI only if folder exists (prevents RuntimeError)
 if STATIC_DIR.exists():
     app.mount("/ui", StaticFiles(directory=str(STATIC_DIR), html=True), name="ui")
 
@@ -61,7 +43,10 @@ def predict(req: PredictRequest):
 def predict_batch(req: PredictBatchRequest):
     results = []
     for item in req.items:
-        fraud, prob, used_threshold = predict_one(item.features, threshold=item.threshold)
-        results.append(PredictResponse(fraud=fraud, confidence=prob, threshold=used_threshold))
+        fraud, prob, used_threshold = predict_one(
+            item.features, threshold=item.threshold
+        )
+        results.append(
+            PredictResponse(fraud=fraud, confidence=prob, threshold=used_threshold)
+        )
     return PredictBatchResponse(results=results)
-
