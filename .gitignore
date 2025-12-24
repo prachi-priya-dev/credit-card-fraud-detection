@@ -8,7 +8,10 @@ __pycache__/
 
 # Data & models (never commit)
 data/raw/
-models/
+models/*
+!models/best_model.joblib
+!models/best_threshold.txt
+
 
 # Reports
 reports/*
