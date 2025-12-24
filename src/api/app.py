@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 from .schemas import PredictRequest, PredictResponse, PredictBatchRequest, PredictBatchResponse
 from .predict import predict_one
@@ -10,6 +11,14 @@ app = FastAPI(
     title="Credit Card Fraud Detection API",
     version="1.0.0",
     description="Predict fraud probability from credit card transaction features.",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # later replace with your UI domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Serve static UI (safe mount)

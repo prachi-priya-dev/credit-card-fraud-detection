@@ -1,6 +1,7 @@
 from pathlib import Path
 import joblib
 import numpy as np
+import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MODEL_PATH = PROJECT_ROOT / "models" / "best_model.joblib"
@@ -38,7 +39,7 @@ def predict_one(features: dict, threshold: float | None = None) -> tuple[int, fl
     used_threshold = float(threshold) if threshold is not None else float(THRESHOLD)
 
     feature_list = features_dict_to_list(features)
-    X = np.array(feature_list, dtype=float).reshape(1, -1)
+    X = pd.DataFrame([feature_list], columns=FEATURE_ORDER)
 
     if hasattr(MODEL, "predict_proba"):
         prob = float(MODEL.predict_proba(X)[0, 1])

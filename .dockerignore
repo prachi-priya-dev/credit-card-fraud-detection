@@ -6,7 +6,6 @@ __pycache__/
 .ipynb_checkpoints/
 data/raw/
 reports/
-models/
 .DS_Store
 .git
 .github
